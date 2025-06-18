@@ -1,3 +1,4 @@
+import { TodoItem } from "./todo-item";
 import { TodoProject } from "./todo-project";
 
 class ProjectList {
@@ -49,7 +50,8 @@ class ProjectList {
 
         addButton.addEventListener('click', () => {
             document.querySelector('#container').removeChild(container);
-            this.projects.push(new TodoProject(nameInput.value));
+            const project = new TodoProject(nameInput.value);
+            this.projects.push(project);
             this.updateProjectsSection();
         });
     }
@@ -61,6 +63,9 @@ class ProjectList {
         for (const project of this.projects) {
             const projectItem = document.createElement('li');
             projectItem.innerText = project.name;
+            projectItem.addEventListener('click', () => {
+                project.populateItems();
+            });
             projectsList.appendChild(projectItem);
         }
     }

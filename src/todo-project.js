@@ -23,6 +23,17 @@ class TodoProject {
             this.items.splice(removeIndex, 1);
         }
     }
+
+    populateItems() {
+        const todoItems = document.querySelector('#content-todo-list');
+        todoItems.innerHTML = '';
+        
+        for (const item of this.items) {
+            const itemSection = document.createElement('div');
+            itemSection.innerText = item.title;
+            todoItems.appendChild(itemSection);
+        }
+    }
 }
 
 export {TodoProject};
