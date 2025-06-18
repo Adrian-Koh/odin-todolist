@@ -50,7 +50,19 @@ class ProjectList {
         addButton.addEventListener('click', () => {
             document.querySelector('#container').removeChild(container);
             this.projects.push(new TodoProject(nameInput.value));
+            this.updateProjectsSection();
         });
+    }
+
+    updateProjectsSection() {
+        const projectsList = document.querySelector('#projects-list');
+        projectsList.innerHTML = '';
+
+        for (const project of this.projects) {
+            const projectItem = document.createElement('li');
+            projectItem.innerText = project.name;
+            projectsList.appendChild(projectItem);
+        }
     }
 }
 
