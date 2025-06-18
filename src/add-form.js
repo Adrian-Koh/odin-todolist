@@ -7,7 +7,7 @@ function createAddProjectForm(projectsList) {
     addProjectForm.addTextInput('Name: ', 'name');
     addProjectForm.addButton('Add Project');
 
-    const addButton = document.querySelector('#form-add-button');
+    const addButton = addProjectForm.container.querySelector('#form-add-button');
     addButton.addEventListener('click', () => {
         const name = document.querySelector('#name').value;
         document.querySelector('#container').removeChild(document.querySelector('#add-form'));
@@ -26,19 +26,22 @@ function createAddItemForm(project) {
     addItemForm.addTextInput('Priority', 'priority');
     addItemForm.addButton('Add To-do Item');
 
+    addItemForm.display();
+
     const addButton = document.querySelector('#form-add-button');
     addButton.addEventListener('click', () => {
-        const title = document.querySelector('#title').value;
-        const description = document.querySelector('#description').value;
-        const dueDate = document.querySelector('#due-date').value;
-        const priority = document.querySelector('#priority').value;
-        document.querySelector('#container').removeChild(document.querySelector('#add-form'));
+        const title = addItemForm.container.querySelector('#title').value;
+        const description = addItemForm.container.querySelector('#description').value;
+        const dueDate = addItemForm.container.querySelector('#due-date').value;
+        const priority = addItemForm.container.querySelector('#priority').value;
+        document.querySelector('#container').removeChild(addItemForm.container);
+
         const item = new TodoItem(title, description, dueDate, priority);
         project.addItem(item);
-        updateProjectsSection(projectsList);
+        project.populateItems();
     });
-    addItemForm.display();
 }
+
 
 
 function updateProjectsSection(projectsList) {
@@ -47,6 +50,7 @@ function updateProjectsSection(projectsList) {
 
     for (const project of projectsList.projects) {
         const projectItem = document.createElement('li');
+        projectItem.id = 'project';
         projectItem.innerText = project.name;
         projectItem.addEventListener('click', () => {
             project.populateItems();
@@ -107,4 +111,4 @@ class AddForm {
     }
 }
 
-export {createAddProjectForm, updateProjectsSection, AddForm};
+export {createAddProjectForm, createAddItemForm, updateProjectsSection, AddForm};
