@@ -26,3 +26,11 @@
 #title, #projects-sidebar, #content {
     border: solid 1px black;
 }
+
+#add-form {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    background-color: blue;
+    color: white;
+}

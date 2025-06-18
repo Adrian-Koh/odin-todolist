@@ -1,11 +1,12 @@
 import './styles.css';
 import { TodoProject } from "./todo-project";
-import { ProjectList } from "./add-project-form";
+import { AddForm, updateProjectsSection, createAddProjectForm } from "./add-form";
+import { ProjectsList } from './projects-list';
 
-const projectList = new ProjectList();
+const projectList = new ProjectsList();
 
 document.querySelector('#add-new-project').addEventListener('click', () => {
-    projectList.createAddProjectForm();
+    createAddProjectForm(projectList);
     console.log(projectList.projects);
 });
 
