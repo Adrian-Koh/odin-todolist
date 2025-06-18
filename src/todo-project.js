@@ -33,7 +33,9 @@ class TodoProject {
         
         for (const item of this.items) {
             const itemSection = document.createElement('div');
-            itemSection.innerText = item.title;
+            itemSection.innerText = item.title + '\n' + item.description;
+            itemSection.id = 'todo-item';
+
             todoItems.appendChild(itemSection);
         }
     }
