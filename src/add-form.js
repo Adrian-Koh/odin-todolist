@@ -6,7 +6,38 @@ function createAddProjectForm(projectsList) {
     const addProjectForm = new AddForm('Add project', projectsList);
     addProjectForm.addTextInput('Name: ', 'name');
     addProjectForm.addButton('Add Project');
+
+    const addButton = document.querySelector('#form-add-button');
+    addButton.addEventListener('click', () => {
+        const name = document.querySelector('#name').value;
+        document.querySelector('#container').removeChild(document.querySelector('#add-form'));
+        const project = new TodoProject(name);
+        projectsList.addProject(project);
+        updateProjectsSection(projectsList);
+    });
     addProjectForm.display();
+}
+
+function createAddItemForm(project) {
+    const addItemForm = new AddForm('Add to-do item');
+    addItemForm.addTextInput('Title: ', 'title');
+    addItemForm.addTextInput('Description: ', 'description');
+    addItemForm.addTextInput('Due date: ', 'due-date');
+    addItemForm.addTextInput('Priority', 'priority');
+    addItemForm.addButton('Add To-do Item');
+
+    const addButton = document.querySelector('#form-add-button');
+    addButton.addEventListener('click', () => {
+        const title = document.querySelector('#title').value;
+        const description = document.querySelector('#description').value;
+        const dueDate = document.querySelector('#due-date').value;
+        const priority = document.querySelector('#priority').value;
+        document.querySelector('#container').removeChild(document.querySelector('#add-form'));
+        const item = new TodoItem(title, description, dueDate, priority);
+        project.addItem(item);
+        updateProjectsSection(projectsList);
+    });
+    addItemForm.display();
 }
 
 
@@ -25,9 +56,7 @@ function updateProjectsSection(projectsList) {
 }
 
 class AddForm {
-    constructor(title, projectsList) {
-        this.projectsList = projectsList;
-
+    constructor(title) {
         this.container = document.createElement('div');
         this.container.id = 'add-form';
 
@@ -68,14 +97,6 @@ class AddForm {
         const addButton = document.createElement('button');
         addButton.innerText = label;
         addButton.id = 'form-add-button';
-
-        addButton.addEventListener('click', () => {
-            const name = document.querySelector('#name').value;
-            document.querySelector('#container').removeChild(this.container);
-            const project = new TodoProject(name);
-            this.projectsList.addProject(project);
-            updateProjectsSection(this.projectsList);
-        });
 
         this.container.append(addButton);
     }
