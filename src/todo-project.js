@@ -1,7 +1,8 @@
 import { TodoItem } from "./todo-item.js";
 
 class TodoProject {
-    constructor() {
+    constructor(name) {
+        this.name = name;
         this.items = [];
     }
 
