@@ -1,4 +1,14 @@
 import './styles.css';
-import { initializeListeners } from './dom-logic';
+import { TodoProject } from "./todo-project";
+import { ProjectList } from "./add-project-form";
 
-initializeListeners();
+const projectList = new ProjectList();
+
+document.querySelector('#add-new-project').addEventListener('click', () => {
+    projectList.createAddProjectForm();
+    console.log(projectList.projects);
+});
+
+document.querySelector('#add-new-item').addEventListener('click', () => {
+
+});
