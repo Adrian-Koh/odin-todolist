@@ -25,6 +25,9 @@ class TodoProject {
     }
 
     populateItems() {
+        const projectTitle = document.querySelector('#content-project-title');
+        projectTitle.innerText = this.name;
+
         const todoItems = document.querySelector('#content-todo-list');
         todoItems.innerHTML = '';
         
