@@ -47,7 +47,7 @@ function createAddItemForm(storage, project) {
             alert('Must provide a due date.');
             return;
         }
-        const priority = addItemForm.container.querySelector('input[name=priority]').value;
+        const priority = addItemForm.container.querySelector('input[name=priority]:checked').value;
         document.querySelector('#container').removeChild(addItemForm.container);
 
         const item = new TodoItem(title, description, dueDate, priority);
