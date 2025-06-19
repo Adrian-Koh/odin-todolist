@@ -5,7 +5,7 @@ import { Storage } from "./storage";
 
 function createAddProjectForm(storage) {
     const addProjectForm = new AddForm('Add project', storage);
-    addProjectForm.addTextInput('Name: ', 'name');
+    addProjectForm.addInput('Name: ', 'name');
     addProjectForm.addButton('Add Project');
 
     const addButton = addProjectForm.container.querySelector('#form-add-button');
@@ -21,10 +21,13 @@ function createAddProjectForm(storage) {
 
 function createAddItemForm(storage, project) {
     const addItemForm = new AddForm('Add to-do item');
-    addItemForm.addTextInput('Title: ', 'title');
-    addItemForm.addTextInput('Description: ', 'description');
-    addItemForm.addTextInput('Due date: ', 'due-date');
-    addItemForm.addTextInput('Priority: ', 'priority');
+    addItemForm.addInput('Title: ', 'title');
+    addItemForm.addInput('Description: ', 'description');
+    addItemForm.addInput('Due date: ', 'due-date', 'date');
+    addItemForm.addRadioButtons('Priority: ', 'priority', 
+        ['High', 'Medium', 'Low'], 
+        ['high', 'medium', 'low']);
+
     addItemForm.addButton('Add To-do Item');
 
     addItemForm.display();
@@ -32,9 +35,18 @@ function createAddItemForm(storage, project) {
     const addButton = document.querySelector('#form-add-button');
     addButton.addEventListener('click', () => {
         const title = addItemForm.container.querySelector('#title').value;
+        if (!title) {
+            alert('Title must be non-empty.');
+            return;
+        }
         const description = addItemForm.container.querySelector('#description').value;
+
         const dueDate = addItemForm.container.querySelector('#due-date').value;
-        const priority = addItemForm.container.querySelector('#priority').value;
+        if (!dueDate) {
+            alert('Must provide a due date.');
+            return;
+        }
+        const priority = addItemForm.container.querySelector('input[name=priority]').value;
         document.querySelector('#container').removeChild(addItemForm.container);
 
         const item = new TodoItem(title, description, dueDate, priority);
@@ -56,7 +68,8 @@ function updateProjectsSection(storage) {
         projectItem.innerText = project.name;
 
         const removeBtn = document.createElement('button');
-        removeBtn.innerText = 'Remove';
+        removeBtn.innerText = '-';
+        removeBtn.id = 'remove-project';
         removeBtn.addEventListener('click', () => {
             storage.removeProject(project);
             updateProjectsSection(storage);
@@ -96,16 +109,48 @@ class AddForm {
         this.container.appendChild(titleRow);
     }
 
-    addTextInput(label, id) {
+    addInput(label, id, type = '') {
         const inputRow = document.createElement('p');
         const labelElement = document.createElement('label');
-        labelElement.for = id;
+        labelElement.htmlFor = id;
         labelElement.innerText = label;
         const input = document.createElement('input');
         input.id = id;
+        if (type)
+            input.type = type;
 
         inputRow.appendChild(labelElement);
         inputRow.appendChild(input);
+
+        this.container.appendChild(inputRow);
+    }
+
+    addRadioButtons(label, id, labels, values) {
+        const inputRow = document.createElement('p');
+        const labelElement = document.createElement('label');
+        labelElement.htmlFor = id;
+        labelElement.innerText = label;
+
+        inputRow.appendChild(labelElement);
+
+        for (let i = 0; i < labels.length; i++) {
+            const radioLabel = document.createElement('label');
+            radioLabel.htmlFor = id + values[i];
+            radioLabel.innerText = labels[i];
+
+            const input = document.createElement('input');
+            input.name = id;
+            input.id = id + values[i];
+            input.type = 'radio';
+            input.value = values[i];
+            if (i === 0)
+                input.checked = true;
+
+            inputRow.appendChild(input);
+            inputRow.appendChild(radioLabel);
+        }
+
+        
 
         this.container.appendChild(inputRow);
     }

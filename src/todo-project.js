@@ -34,7 +34,7 @@ class TodoProject {
         
         for (const item of this.items) {
             const itemSection = document.createElement('div');
-            itemSection.innerText = item.title + '\n' + item.description;
+            itemSection.innerText = item.title + '\ndue by ' + item.dueDate;
             itemSection.id = 'todo-item';
 
             todoItems.appendChild(itemSection);

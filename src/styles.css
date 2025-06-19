@@ -26,6 +26,7 @@
     display: grid;
     grid-template-rows: 1fr 5fr 1fr;
     justify-content: center;
+    width: 100%;
 }
 
 #content {
@@ -62,13 +63,15 @@
 
 #content-todo-list {
     display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
-    overflow: auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
 }
 
 #todo-item {
     font-size: 1.2rem;
     padding: 5px;
+    width: 200px;
+    height: 100px;
+    justify-self: center;
 }
 
 #add-new-item {
@@ -120,4 +123,14 @@
 
 #todo-item {
     border: solid 1px black;
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+}
+
+#remove-project {
+    justify-self: flex-end;
+    margin-left: 10px;
 }
