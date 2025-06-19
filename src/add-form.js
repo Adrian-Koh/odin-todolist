@@ -14,7 +14,7 @@ function createAddProjectForm(storage) {
         document.querySelector('#container').removeChild(document.querySelector('#add-form'));
         const project = new TodoProject(name);
         storage.addProject(project);
-        updateProjectsSection(storage.projectsList);
+        updateProjectsSection(storage);
     });
     addProjectForm.display();
 }
@@ -45,14 +45,24 @@ function createAddItemForm(storage, project) {
 
 
 
-function updateProjectsSection(projectsList) {
+function updateProjectsSection(storage) {
     const projectsListSection = document.querySelector('#projects-list');
     projectsListSection.innerHTML = '';
 
-    for (const project of projectsList.projects) {
+    for (const project of storage.projectsList.projects) {
         const projectItem = document.createElement('li');
-        projectItem.id = 'project';
+        projectItem.className = 'project';
+        projectItem.id = project.id;
         projectItem.innerText = project.name;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.innerText = 'Remove';
+        removeBtn.addEventListener('click', () => {
+            storage.removeProject(project);
+            updateProjectsSection(storage);
+        });
+        projectItem.appendChild(removeBtn);
+
         projectItem.addEventListener('click', () => {
             project.populateItems();
         });

@@ -7,7 +7,7 @@ import { Storage } from './storage.js';
 
 const storage = new Storage();
 let currentProject = null;
-updateProjectsSection(storage.projectsList);
+updateProjectsSection(storage);
 
 document.querySelector('#add-new-project').addEventListener('click', () => {
     createAddProjectForm(storage);
@@ -24,8 +24,8 @@ document.querySelector('#add-new-item').addEventListener('click', () => {
 
 const projectsListSection = document.querySelector('#projects-list');
 projectsListSection.addEventListener('click', (event) => {
-    if (event.target.id === 'project') {
-        currentProject = storage.projectsList.getProject(event.target.innerText);
+    if (event.target.className === 'project') {
+        currentProject = storage.projectsList.getProject(event.target.id);
         currentProject.populateItems();
     }
 });

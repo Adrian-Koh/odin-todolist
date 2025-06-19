@@ -7,9 +7,9 @@ class ProjectsList {
         this.projects.push(project);
     }
 
-    getProject(name) {
+    getProject(id) {
         for (const project of this.projects) {
-            if (name === project.name) {
+            if (id === project.id) {
                 return project;
             }
         }

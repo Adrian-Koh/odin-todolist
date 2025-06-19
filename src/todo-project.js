@@ -4,7 +4,7 @@ class TodoProject {
     constructor(name, id = -1) {
         this.name = name;
         this.items = [];
-        this.id = id === -1 ? crypto.randomUUID : id;
+        this.id = id === -1 ? crypto.randomUUID() : id;
     }
 
     addItem(item) {

@@ -39,9 +39,24 @@ class Storage {
         this.updateStorage();
     }
 
+    removeProject(project) {
+        let removeIndex = -1;
+        for (let i = 0; i < this.projectsList.projects.length; i++) {
+            if (project.id === this.projectsList.projects[i].id) {
+                removeIndex = i;
+                break;
+            }
+        }
+
+        if (removeIndex !== -1) {
+            this.projectsList.projects.splice(removeIndex, 1);
+        }
+        this.updateStorage();
+    }
+
     addItem(project, item) {
         for (const proj of this.projectsList.projects) {
-            if (proj.name === project.name) {
+            if (proj.id === project.id) {
                 proj.addItem(item);
             }
         }

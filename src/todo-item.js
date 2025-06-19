@@ -5,7 +5,7 @@ class TodoItem {
         this.dueDate = dueDate;
         this.priority = priority;
         this.completed = false;
-        this.id = id === -1 ? crypto.randomUUID : id;
+        this.id = id === -1 ? crypto.randomUUID() : id;
     }
 
     setComplete() {
