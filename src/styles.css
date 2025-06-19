@@ -46,6 +46,12 @@
     left: 50%;
     background-color: blue;
     color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
 }
 
 #content-project-title {
@@ -81,4 +87,32 @@
 #add-new-project {
     align-self: center;
     font-size: 1.1rem;
+}
+
+#projects-list {
+    list-style: none;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+#projects-list li {
+    margin-bottom: 5px;
+}
+
+#add-form-title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-form-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+#form-add-button {
+    align-self: center;
+}
+
+#add-form p {
+    margin: 10px;
 }

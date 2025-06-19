@@ -23,7 +23,7 @@ function createAddItemForm(project) {
     addItemForm.addTextInput('Title: ', 'title');
     addItemForm.addTextInput('Description: ', 'description');
     addItemForm.addTextInput('Due date: ', 'due-date');
-    addItemForm.addTextInput('Priority', 'priority');
+    addItemForm.addTextInput('Priority: ', 'priority');
     addItemForm.addButton('Add To-do Item');
 
     addItemForm.display();
@@ -65,9 +65,11 @@ class AddForm {
         this.container.id = 'add-form';
 
         const titleRow = document.createElement('div');
+        titleRow.id = 'add-form-title-row';
 
         const titleText = document.createElement('div');
         titleText.innerText = title;
+        titleText.id = 'add-form-title';
 
         const closeButton = document.createElement('button');
         closeButton.id = 'close-add-form';
