@@ -1,8 +1,9 @@
 import './styles.css';
 import { TodoProject } from "./todo-project";
-import { AddForm, updateProjectsSection, createAddProjectForm, createAddItemForm } from "./add-form";
+import { AddForm, createAddProjectForm, createAddItemForm } from "./add-form";
 import { ProjectsList } from './projects-list'
 import { Storage } from './storage.js';
+import { populateTodoItems, updateProjectsSection } from './dom-logic.js';
 
 
 const storage = new Storage();
@@ -26,6 +27,6 @@ const projectsListSection = document.querySelector('#projects-list');
 projectsListSection.addEventListener('click', (event) => {
     if (event.target.className === 'project') {
         currentProject = storage.projectsList.getProject(event.target.id);
-        currentProject.populateItems();
+        populateTodoItems(currentProject);
     }
 });

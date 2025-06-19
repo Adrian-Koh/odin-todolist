@@ -24,22 +24,6 @@ class TodoProject {
             this.items.splice(removeIndex, 1);
         }
     }
-
-    populateItems() {
-        const projectTitle = document.querySelector('#content-project-title');
-        projectTitle.innerText = this.name;
-
-        const todoItems = document.querySelector('#content-todo-list');
-        todoItems.innerHTML = '';
-        
-        for (const item of this.items) {
-            const itemSection = document.createElement('div');
-            itemSection.innerText = item.title + '\ndue by ' + item.dueDate;
-            itemSection.id = 'todo-item';
-
-            todoItems.appendChild(itemSection);
-        }
-    }
 }
 
 export {TodoProject};

@@ -1,6 +1,7 @@
 import { TodoItem } from "./todo-item";
 import { TodoProject } from "./todo-project";
 import { Storage } from "./storage";
+import { updateProjectsSection, populateTodoItems } from "./dom-logic";
 
 
 function createAddProjectForm(storage) {
@@ -51,36 +52,8 @@ function createAddItemForm(storage, project) {
 
         const item = new TodoItem(title, description, dueDate, priority);
         storage.addItem(project, item);
-        project.populateItems();
+        populateTodoItems(project);
     });
-}
-
-
-
-function updateProjectsSection(storage) {
-    const projectsListSection = document.querySelector('#projects-list');
-    projectsListSection.innerHTML = '';
-
-    for (const project of storage.projectsList.projects) {
-        const projectItem = document.createElement('li');
-        projectItem.className = 'project';
-        projectItem.id = project.id;
-        projectItem.innerText = project.name;
-
-        const removeBtn = document.createElement('button');
-        removeBtn.innerText = '-';
-        removeBtn.id = 'remove-project';
-        removeBtn.addEventListener('click', () => {
-            storage.removeProject(project);
-            updateProjectsSection(storage);
-        });
-        projectItem.appendChild(removeBtn);
-
-        projectItem.addEventListener('click', () => {
-            project.populateItems();
-        });
-        projectsListSection.appendChild(projectItem);
-    }
 }
 
 class AddForm {
@@ -169,4 +142,4 @@ class AddForm {
     }
 }
 
-export {createAddProjectForm, createAddItemForm, updateProjectsSection, AddForm};
+export {createAddProjectForm, createAddItemForm, AddForm};
