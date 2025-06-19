@@ -3,33 +3,40 @@ import { TodoItem } from './todo-item';
 import { TodoProject } from './todo-project';
 
 class Storage {
-    static ProjectsListName = 'ProjectList';
+    static ProjectsListName = 'ProjectsList';
 
     constructor() {
         let projectsListRaw = localStorage.getItem(Storage.ProjectsListName);
         this.projectsList = new ProjectsList();
 
         if (projectsListRaw) {
-            let projectListObj = JSON.parse(projectsListRaw);
-
-            for (const project of projectListObj.projects) {
-                const projectObj = new TodoProject(project.name);
-                for (const item of project.items) {
-                    let itemObj = new TodoItem(item.title, item.description, item.dueDate, item.priority, item.id);
-                    projectObj.addItem(itemObj);
-                }
-                this.projectsList.addProject(projectObj);
-            }
+            this.deserialize(projectsListRaw);
         }
         else {
-            localStorage.setItem(Storage.ProjectsListName, JSON.stringify(this.projectsList));
+            this.updateStorage();
         }
+    }
 
+    deserialize(projectsListRaw) {
+        let projectListObj = JSON.parse(projectsListRaw);
+
+        for (const project of projectListObj.projects) {
+            const projectObj = new TodoProject(project.name, project.id);
+            for (const item of project.items) {
+                let itemObj = new TodoItem(item.title, item.description, item.dueDate, item.priority, item.id);
+                projectObj.addItem(itemObj);
+            }
+            this.projectsList.addProject(projectObj);
+        }
+    }
+
+    updateStorage() {
+        localStorage.setItem(Storage.ProjectsListName, JSON.stringify(this.projectsList));
     }
 
     addProject(project) {
         this.projectsList.addProject(project);
-        localStorage.setItem(Storage.ProjectsListName, JSON.stringify(this.projectsList));
+        this.updateStorage();
     }
 
     addItem(project, item) {
@@ -38,7 +45,7 @@ class Storage {
                 proj.addItem(item);
             }
         }
-        localStorage.setItem(Storage.ProjectsListName, JSON.stringify(this.projectsList));
+        this.updateStorage();
     }
 }
 

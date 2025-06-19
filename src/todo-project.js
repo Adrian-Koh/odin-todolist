@@ -1,9 +1,10 @@
 import { TodoItem } from "./todo-item.js";
 
 class TodoProject {
-    constructor(name) {
+    constructor(name, id = -1) {
         this.name = name;
         this.items = [];
+        this.id = id === -1 ? crypto.randomUUID : id;
     }
 
     addItem(item) {
@@ -13,7 +14,7 @@ class TodoProject {
     removeItem(item) {
         let removeIndex = -1;
         for (let i = 0; i < this.items.length; i++) {
-            if (item.id === this.items[i]) {
+            if (item.id === this.items[i].id) {
                 removeIndex = i;
                 break;
             }
