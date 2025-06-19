@@ -19,7 +19,7 @@ function createAddProjectForm(storage) {
     addProjectForm.display();
 }
 
-function createAddItemForm(project) {
+function createAddItemForm(storage, project) {
     const addItemForm = new AddForm('Add to-do item');
     addItemForm.addTextInput('Title: ', 'title');
     addItemForm.addTextInput('Description: ', 'description');
@@ -38,7 +38,7 @@ function createAddItemForm(project) {
         document.querySelector('#container').removeChild(addItemForm.container);
 
         const item = new TodoItem(title, description, dueDate, priority);
-        project.addItem(item);
+        storage.addItem(project, item);
         project.populateItems();
     });
 }

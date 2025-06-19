@@ -1,11 +1,12 @@
 class TodoItem {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, id = -1) {
         this.title = title;
         this.description = description;
-        this.id = crypto.randomUUID();
         this.dueDate = dueDate;
         this.priority = priority;
         this.completed = false;
+        if (id === -1)
+            this.id = crypto.randomUUID();
     }
 
     setComplete() {

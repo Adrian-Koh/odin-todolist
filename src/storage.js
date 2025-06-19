@@ -13,7 +13,12 @@ class Storage {
             let projectListObj = JSON.parse(projectsListRaw);
 
             for (const project of projectListObj.projects) {
-                this.projectsList.addProject(new TodoProject(project.name));
+                const projectObj = new TodoProject(project.name);
+                for (const item of project.items) {
+                    let itemObj = new TodoItem(item.title, item.description, item.dueDate, item.priority, item.id);
+                    projectObj.addItem(itemObj);
+                }
+                this.projectsList.addProject(projectObj);
             }
         }
         else {
@@ -24,6 +29,15 @@ class Storage {
 
     addProject(project) {
         this.projectsList.addProject(project);
+        localStorage.setItem(Storage.ProjectsListName, JSON.stringify(this.projectsList));
+    }
+
+    addItem(project, item) {
+        for (const proj of this.projectsList.projects) {
+            if (proj.name === project.name) {
+                proj.addItem(item);
+            }
+        }
         localStorage.setItem(Storage.ProjectsListName, JSON.stringify(this.projectsList));
     }
 }

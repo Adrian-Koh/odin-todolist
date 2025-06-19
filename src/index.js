@@ -15,7 +15,7 @@ document.querySelector('#add-new-project').addEventListener('click', () => {
 
 document.querySelector('#add-new-item').addEventListener('click', () => {
     if (currentProject) {
-        createAddItemForm(currentProject);
+        createAddItemForm(storage, currentProject);
     }
     else {
         alert('Select a project before adding a to-do item.');
