@@ -37,6 +37,10 @@ function populateTodoItems(storage, project) {
         itemSection.id = 'todo-item';
         itemSection.className = item.priority;
 
+        const buttons = document.createElement('div');
+        buttons.id = 'todo-item-buttons';
+        itemSection.appendChild(buttons);
+
         const detailsBtn = document.createElement('button');
         detailsBtn.className = 'item-details';
         detailsBtn.innerText = '\u2BC6';
@@ -64,9 +68,9 @@ function populateTodoItems(storage, project) {
             storage.removeItem(project, item);
         });
 
-        itemSection.appendChild(detailsBtn);
-        itemSection.appendChild(collapseBtn);
-        itemSection.appendChild(removeBtn);
+        buttons.appendChild(detailsBtn);
+        buttons.appendChild(collapseBtn);
+        buttons.appendChild(removeBtn);
         todoItems.appendChild(itemSection);
     }
 }
