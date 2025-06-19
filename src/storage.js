@@ -62,6 +62,19 @@ class Storage {
         }
         this.updateStorage();
     }
+
+    removeItem(project, item) {
+        for (const proj of this.projectsList.projects) {
+            if (proj.id === project.id) {
+                for (const projectItem of proj.items) {
+                    if (projectItem.id === item.id) {
+                        proj.removeItem(item)
+                    }
+                }
+            }
+        }
+        this.updateStorage();
+    }
 }
 
 export {Storage};

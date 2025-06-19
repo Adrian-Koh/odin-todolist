@@ -18,13 +18,13 @@ function updateProjectsSection(storage) {
         projectItem.appendChild(removeBtn);
 
         projectItem.addEventListener('click', () => {
-            populateTodoItems(project);
+            populateTodoItems(storage, project);
         });
         projectsListSection.appendChild(projectItem);
     }
 }
 
-function populateTodoItems(project) {
+function populateTodoItems(storage, project) {
     const projectTitle = document.querySelector('#content-project-title');
     projectTitle.innerText = project.name;
 
@@ -46,6 +46,10 @@ function populateTodoItems(project) {
         const removeBtn = document.createElement('button');
         removeBtn.className = 'item-remove';
         removeBtn.innerText = '\u2BBF';
+        removeBtn.addEventListener('click', () => {
+            todoItems.removeChild(itemSection);
+            storage.removeItem(project, item);
+        });
 
         itemSection.appendChild(detailsBtn);
         itemSection.appendChild(removeBtn);

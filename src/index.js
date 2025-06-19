@@ -27,6 +27,6 @@ const projectsListSection = document.querySelector('#projects-list');
 projectsListSection.addEventListener('click', (event) => {
     if (event.target.className === 'project') {
         currentProject = storage.projectsList.getProject(event.target.id);
-        populateTodoItems(currentProject);
+        populateTodoItems(storage, currentProject);
     }
 });

@@ -52,7 +52,7 @@ function createAddItemForm(storage, project) {
 
         const item = new TodoItem(title, description, dueDate, priority);
         storage.addItem(project, item);
-        populateTodoItems(project);
+        populateTodoItems(storage, project);
     });
 }
 
