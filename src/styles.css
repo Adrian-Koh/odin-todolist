@@ -4,6 +4,7 @@
     grid-template-columns: 1fr 4fr;
 
     position: relative;
+
 }
 
 #container-title {
@@ -16,6 +17,8 @@
 
     font-size: 1.8rem;
     padding: 10px;
+
+    color: rgb(6, 71, 17);
 }
 
 #projects-sidebar {
@@ -34,11 +37,14 @@
     grid-row: 2 / 3;
 
     display: grid;
+    gap: 5px;
     grid-template-rows: 1fr 8fr 1fr;
 }
 
 #container-title, #projects-sidebar, #content {
-    border: solid 1px black;
+    border: solid 3px white;
+    border-radius: 5px;
+    background-color: rgb(17, 202, 72);
 }
 
 #add-form {
@@ -57,8 +63,17 @@
 
 #content-project-title {
     font-size: 1.6rem;
+    font-weight: 500;
     justify-self: center;
     align-self: center;
+
+    background-color: rgb(8, 99, 49);
+    color: white;
+    width: 90%;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
 }
 
 #content-todo-list {
@@ -74,33 +89,30 @@
     justify-self: center;
 }
 
-#add-new-item {
-    font-size: 1.1rem;
-    justify-self: center;
-    align-self: center;
-}
-
 #sidebar-title {
-    border: solid 1px black;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(6, 71, 17);
     text-align: center;
     align-self: center;
 }
 
-#add-new-project {
+#add-new-project, #add-new-item {
     align-self: center;
+    justify-self: center;
     font-size: 1.1rem;
+    padding: 8px;
+
+    background-color: rgb(8, 99, 49);
+    border: solid 3px white;
+    border-radius: 3px;
+    color: white;
 }
 
 #projects-list {
     list-style: none;
     font-size: 1.2rem;
     padding: 5px;
-}
-
-#projects-list li {
-    margin-bottom: 5px;
-    border: solid 1px black;
 }
 
 #add-form-title-row {
@@ -122,12 +134,19 @@
 }
 
 #todo-item {
-    border: solid 1px black;
+    border: solid 3px white;
+    border-radius: 5px;
+    color: white;
 }
 
 .project {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+    background-color: rgb(8, 99, 49);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 #remove-project {
