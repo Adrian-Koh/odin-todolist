@@ -156,7 +156,7 @@
     font-size: 1.1rem;
 }
 
-.item-details, .item-remove {
+.item-details, .item-details-collapse, .item-remove {
     color: white;
     background-color: black;
     font-size: 1.2rem;

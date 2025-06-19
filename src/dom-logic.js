@@ -40,7 +40,19 @@ function populateTodoItems(storage, project) {
         detailsBtn.className = 'item-details';
         detailsBtn.innerText = '\u2BC6';
         detailsBtn.addEventListener('click', () => {
+            collapseBtn.style.display = 'inline';
+            detailsBtn.style.display = 'none';
             revealDetails(itemSection, item);
+        });
+
+        const collapseBtn = document.createElement('button');
+        collapseBtn.className = 'item-details-collapse';
+        collapseBtn.innerText = '\u2BC5';
+        collapseBtn.style.display = 'none';
+        collapseBtn.addEventListener('click', () => {
+            collapseBtn.style.display = 'none';
+            detailsBtn.style.display = 'inline';
+            collapseDetails(itemSection);
         });
 
         const removeBtn = document.createElement('button');
@@ -52,6 +64,7 @@ function populateTodoItems(storage, project) {
         });
 
         itemSection.appendChild(detailsBtn);
+        itemSection.appendChild(collapseBtn);
         itemSection.appendChild(removeBtn);
         todoItems.appendChild(itemSection);
     }
@@ -59,13 +72,22 @@ function populateTodoItems(storage, project) {
 
 function revealDetails(itemSection, item) {
     const descriptionItem = document.createElement('div');
+    descriptionItem.className = 'item-description';
     descriptionItem.innerText = item.description;
 
     const priorityItem = document.createElement('div');
+    priorityItem.className = 'item-priority';
     priorityItem.innerText = item.priority;
 
     itemSection.appendChild(descriptionItem);
     itemSection.appendChild(priorityItem);
+}
+
+function collapseDetails(itemSection) {
+    const descriptionItem = itemSection.querySelector('.item-description');
+    const priorityItem = itemSection.querySelector('.item-priority');
+    itemSection.removeChild(descriptionItem);
+    itemSection.removeChild(priorityItem);
 }
 
 export {updateProjectsSection, populateTodoItems};
