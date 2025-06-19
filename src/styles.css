@@ -97,6 +97,7 @@
 
 #projects-list li {
     margin-bottom: 5px;
+    border: solid 1px black;
 }
 
 #add-form-title-row {
@@ -115,4 +116,8 @@
 
 #add-form p {
     margin: 10px;
+}
+
+#todo-item {
+    border: solid 1px black;
 }

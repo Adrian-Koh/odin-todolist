@@ -1,9 +1,10 @@
 import { TodoItem } from "./todo-item";
 import { TodoProject } from "./todo-project";
+import { Storage } from "./storage";
 
 
-function createAddProjectForm(projectsList) {
-    const addProjectForm = new AddForm('Add project', projectsList);
+function createAddProjectForm(storage) {
+    const addProjectForm = new AddForm('Add project', storage);
     addProjectForm.addTextInput('Name: ', 'name');
     addProjectForm.addButton('Add Project');
 
@@ -12,8 +13,8 @@ function createAddProjectForm(projectsList) {
         const name = document.querySelector('#name').value;
         document.querySelector('#container').removeChild(document.querySelector('#add-form'));
         const project = new TodoProject(name);
-        projectsList.addProject(project);
-        updateProjectsSection(projectsList);
+        storage.addProject(project);
+        updateProjectsSection(storage.projectsList);
     });
     addProjectForm.display();
 }
