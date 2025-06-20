@@ -13,6 +13,7 @@ class Storage {
             this.deserialize(projectsListRaw);
         }
         else {
+            this.projectsList.addProject(new TodoProject('Main'));  // default project
             this.updateStorage();
         }
     }

@@ -7,8 +7,9 @@ import { populateTodoItems, updateProjectsSection } from './dom-logic.js';
 
 
 const storage = new Storage();
-let currentProject = null;
+let currentProject = storage.projectsList.projects[0];
 updateProjectsSection(storage);
+populateTodoItems(storage, currentProject);
 
 document.querySelector('#add-new-project').addEventListener('click', () => {
     createAddProjectForm(storage);

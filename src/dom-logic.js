@@ -1,3 +1,5 @@
+import { TodoProject } from "./todo-project";
+
 function updateProjectsSection(storage) {
     const projectsListSection = document.querySelector('#projects-list');
     projectsListSection.innerHTML = '';
@@ -13,12 +15,18 @@ function updateProjectsSection(storage) {
         removeBtn.id = 'remove-project';
         removeBtn.addEventListener('click', () => {
             storage.removeProject(project);
+
+            if (storage.projectsList.projects.length === 0)
+                storage.addProject(new TodoProject('Main'));
+
             updateProjectsSection(storage);
+            populateTodoItems(storage, storage.projectsList.projects[0]);
         });
         projectItem.appendChild(removeBtn);
 
-        projectItem.addEventListener('click', () => {
-            populateTodoItems(storage, project);
+        projectItem.addEventListener('click', (event) => {
+            if (event.target.id !== 'remove-project')
+                populateTodoItems(storage, project);
         });
         projectsListSection.appendChild(projectItem);
     }
