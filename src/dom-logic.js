@@ -77,6 +77,17 @@ function populateTodoItems(storage, project) {
             collapseDetails(itemSection);
         });
 
+        const completeBtn = document.createElement('button');
+        completeBtn.className = 'item-complete';
+        completeBtn.innerText = '\u2713';
+        completeBtn.addEventListener('click', () => {
+            item.setComplete();
+            storage.updateStorage();
+            const completedItem = itemSection.querySelector('.item-completed');
+            if (completedItem)
+                completedItem.innerText = item.completed ? 'completed' : 'not completed';
+        });
+
         const removeBtn = document.createElement('button');
         removeBtn.className = 'item-remove';
         removeBtn.innerText = '\u2BBF';
@@ -87,6 +98,7 @@ function populateTodoItems(storage, project) {
 
         buttons.appendChild(detailsBtn);
         buttons.appendChild(collapseBtn);
+        buttons.appendChild(completeBtn);
         buttons.appendChild(removeBtn);
         todoItems.appendChild(itemSection);
     }
@@ -101,15 +113,22 @@ function revealDetails(itemSection, item) {
     priorityItem.className = 'item-priority';
     priorityItem.innerText = item.priority + ' priority';
 
+    const completedItem = document.createElement('div');
+    completedItem.className = 'item-completed';
+    completedItem.innerText = item.completed ? 'completed' : 'not completed';
+
     itemSection.appendChild(descriptionItem);
     itemSection.appendChild(priorityItem);
+    itemSection.appendChild(completedItem);
 }
 
 function collapseDetails(itemSection) {
     const descriptionItem = itemSection.querySelector('.item-description');
     const priorityItem = itemSection.querySelector('.item-priority');
+    const completedItem = itemSection.querySelector('.item-completed');
     itemSection.removeChild(descriptionItem);
     itemSection.removeChild(priorityItem);
+    itemSection.removeChild(completedItem);
 }
 
 export {updateProjectsSection, populateTodoItems};

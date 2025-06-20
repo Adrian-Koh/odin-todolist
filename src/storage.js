@@ -24,7 +24,7 @@ class Storage {
         for (const project of projectListObj.projects) {
             const projectObj = new TodoProject(project.name, project.id);
             for (const item of project.items) {
-                let itemObj = new TodoItem(item.title, item.description, item.dueDate, item.priority, item.id);
+                let itemObj = new TodoItem(item.title, item.description, item.dueDate, item.priority, item.id, item.completed);
                 projectObj.addItem(itemObj);
             }
             this.projectsList.addProject(projectObj);

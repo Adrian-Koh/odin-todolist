@@ -167,13 +167,17 @@ html {
     font-size: 1.1rem;
 }
 
-.item-details, .item-details-collapse, .item-remove, #remove-project, #close-add-form {
+.item-details, .item-details-collapse, .item-remove, #remove-project, #close-add-form, .item-complete {
     background-color: white;
     color: black;
     font-size: 1.2rem;
     border: none;
     border-radius: 50%;
     padding: 0px 7px;
+}
+
+.item-complete {
+    padding: 4px 7px;
 }
 
 .high {
@@ -229,7 +233,7 @@ html {
     grid-row: 4 / 5;
 }
 
-.todo-item-duedate, .item-description, .item-priority {
+.todo-item-duedate, .item-description, .item-priority, .item-completed {
     grid-column: 1 / 2;
     font-size: 1rem;
 }

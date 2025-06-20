@@ -103,7 +103,6 @@ class AddForm {
     addRadioButtons(label, id, labels, values) {
         const inputRow = document.createElement('p');
         const labelElement = document.createElement('label');
-        labelElement.htmlFor = id;
         labelElement.innerText = label;
 
         inputRow.appendChild(labelElement);
