@@ -1,8 +1,9 @@
 import { TodoItem } from "./todo-item.js";
 
 class TodoProject {
-    constructor(name, id = -1) {
+    constructor(name, storage, id = -1) {
         this.name = name;
+        this.storage = storage;
         this.items = [];
         this.id = id === -1 ? crypto.randomUUID() : id;
     }

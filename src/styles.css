@@ -167,13 +167,18 @@ html {
     font-size: 1.1rem;
 }
 
-.item-details, .item-details-collapse, .item-remove, #remove-project, #close-add-form, .item-complete {
+.item-details, .item-details-collapse, .item-remove, #remove-project, #close-add-form, .item-complete, .item-edit {
     background-color: white;
     color: black;
     font-size: 1.2rem;
     border: none;
     border-radius: 50%;
     padding: 0px 7px;
+}
+
+.item-edit {
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .item-complete {
@@ -220,9 +225,10 @@ html {
     grid-row: 1 / 5;
     grid-column: 2 / 3;
     justify-self: center;
-    display: flex;
+    display: grid;
+    grid: 1fr 1fr 1fr 1fr / 3fr;
     gap: 5px;
-    align-items: baseline;
+    /* align-items: baseline; */
 }
 
 .item-description {

@@ -11,6 +11,13 @@ class TodoItem {
     setComplete() {
         this.completed = true;
     }
+
+    editDetails(title, description, dueDate, priority) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+    }
 }
 
 export {TodoItem};

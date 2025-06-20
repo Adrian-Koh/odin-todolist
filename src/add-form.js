@@ -22,28 +22,42 @@ function createAddProjectForm(storage) {
 }
 
 function createAddItemForm(storage, project) {
-    const addItemForm = new AddForm('Add to-do item');
-    addItemForm.addInput('Title: ', 'title');
-    addItemForm.addInput('Description: ', 'description');
-    addItemForm.addInput('Due date: ', 'due-date', 'date');
-    addItemForm.addRadioButtons('Priority: ', 'priority', 
-        ['High', 'Medium', 'Low'], 
-        ['high', 'medium', 'low']);
-
-    addItemForm.addButton('Add to-do item');
-
-    addItemForm.display();
+    const addItemForm = createItemForm('Add to-do item');
 
     const addButton = document.querySelector('#form-add-button');
     addButton.addEventListener('click', () => {
-        const title = addItemForm.container.querySelector('#title').value;
+        const inputValues = getInputValues(addItemForm);
+
+        const item = new TodoItem(inputValues.title, inputValues.description, inputValues.dueDate, inputValues.priority);
+        storage.addItem(project, item);
+        populateTodoItems(storage, project);
+    });
+}
+
+function createItemForm(label) {
+    const form = new AddForm(label);
+    form.addInput('Title: ', 'title');
+    form.addInput('Description: ', 'description');
+    form.addInput('Due date: ', 'due-date', 'date');
+    form.addRadioButtons('Priority: ', 'priority', 
+        ['High', 'Medium', 'Low'], 
+        ['high', 'medium', 'low']);
+
+    form.addButton(label);
+
+    form.display();
+    return form;
+}
+
+function getInputValues(form) {
+    const title = form.container.querySelector('#title').value;
         if (!title) {
             alert('Title must be non-empty.');
             return;
         }
-        const description = addItemForm.container.querySelector('#description').value;
+        const description = form.container.querySelector('#description').value;
 
-        const dueDate = addItemForm.container.querySelector('#due-date').value;
+        const dueDate = form.container.querySelector('#due-date').value;
         if (!dueDate) {
             alert('Must provide a due date.');
             return;
@@ -53,11 +67,24 @@ function createAddItemForm(storage, project) {
             return;
         }
 
-        const priority = addItemForm.container.querySelector('input[name=priority]:checked').value;
-        document.querySelector('#container').removeChild(addItemForm.container);
+        const priority = form.container.querySelector('input[name=priority]:checked').value;
+        document.querySelector('#container').removeChild(form.container);
 
-        const item = new TodoItem(title, description, dueDate, priority);
-        storage.addItem(project, item);
+        return { title, description, dueDate, priority };
+}
+
+function createEditItemForm(storage, project, item) {
+    const editItemForm = createItemForm('Edit to-do item');
+    editItemForm.container.querySelector('#title').value = item.title;
+    editItemForm.container.querySelector('#description').value = item.description;
+    editItemForm.container.querySelector('#due-date').value = item.dueDate;
+    editItemForm.container.querySelector(`input[value="${item.priority}"]`).checked = true;  
+
+    const editButton = document.querySelector('#form-add-button');
+    editButton.addEventListener('click', () => {
+        const inputValues = getInputValues(editItemForm);
+        item.editDetails(inputValues.title, inputValues.description, inputValues.dueDate, inputValues.priority);
+        storage.updateStorage();
         populateTodoItems(storage, project);
     });
 }
@@ -146,4 +173,4 @@ class AddForm {
     }
 }
 
-export {createAddProjectForm, createAddItemForm, AddForm};
+export {createAddProjectForm, createAddItemForm, createEditItemForm, AddForm};

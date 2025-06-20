@@ -1,5 +1,6 @@
 import { TodoProject } from "./todo-project";
 import { formatDate } from "./date-verify";
+import { createEditItemForm } from "./add-form";
 
 function updateProjectsSection(storage) {
     const projectsListSection = document.querySelector('#projects-list');
@@ -97,10 +98,18 @@ function populateTodoItems(storage, project) {
             storage.removeItem(project, item);
         });
 
+        const editBtn = document.createElement('button');
+        editBtn.className = 'item-edit';
+        editBtn.innerText = 'Edit';
+        editBtn.addEventListener('click', () => {
+            createEditItemForm(storage, project, item);
+        });
+
         buttons.appendChild(detailsBtn);
         buttons.appendChild(collapseBtn);
         buttons.appendChild(completeBtn);
         buttons.appendChild(removeBtn);
+        buttons.appendChild(editBtn);
         todoItems.appendChild(itemSection);
     }
 }
