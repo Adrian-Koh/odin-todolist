@@ -33,9 +33,18 @@ function populateTodoItems(storage, project) {
     
     for (const item of project.items) {
         const itemSection = document.createElement('div');
-        itemSection.innerText = item.title + '\ndue by ' + item.dueDate;
         itemSection.id = 'todo-item';
         itemSection.className = item.priority;
+
+        const itemTitle = document.createElement('div');
+        itemTitle.innerText = item.title;
+        itemTitle.id = 'todo-item-title';
+        itemSection.appendChild(itemTitle);
+
+        const itemDueDate = document.createElement('div');
+        itemDueDate.innerText = 'due by ' + item.dueDate;
+        itemDueDate.id = 'todo-item-duedate';
+        itemSection.appendChild(itemDueDate);
 
         const buttons = document.createElement('div');
         buttons.id = 'todo-item-buttons';
