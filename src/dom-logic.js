@@ -9,7 +9,7 @@ function updateProjectsSection(storage) {
         projectItem.innerText = project.name;
 
         const removeBtn = document.createElement('button');
-        removeBtn.innerText = '\u2BBF';
+        removeBtn.innerText = 'X';
         removeBtn.id = 'remove-project';
         removeBtn.addEventListener('click', () => {
             storage.removeProject(project);
@@ -38,16 +38,16 @@ function populateTodoItems(storage, project) {
 
         const itemTitle = document.createElement('div');
         itemTitle.innerText = item.title;
-        itemTitle.id = 'todo-item-title';
+        itemTitle.className = 'todo-item-title';
         itemSection.appendChild(itemTitle);
 
         const itemDueDate = document.createElement('div');
         itemDueDate.innerText = 'due by ' + item.dueDate;
-        itemDueDate.id = 'todo-item-duedate';
+        itemDueDate.className = 'todo-item-duedate';
         itemSection.appendChild(itemDueDate);
 
         const buttons = document.createElement('div');
-        buttons.id = 'todo-item-buttons';
+        buttons.className = 'todo-item-buttons';
         itemSection.appendChild(buttons);
 
         const detailsBtn = document.createElement('button');
@@ -91,7 +91,7 @@ function revealDetails(itemSection, item) {
 
     const priorityItem = document.createElement('div');
     priorityItem.className = 'item-priority';
-    priorityItem.innerText = item.priority;
+    priorityItem.innerText = item.priority + ' priority';
 
     itemSection.appendChild(descriptionItem);
     itemSection.appendChild(priorityItem);

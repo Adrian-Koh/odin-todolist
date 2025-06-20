@@ -29,7 +29,7 @@ function createAddItemForm(storage, project) {
         ['High', 'Medium', 'Low'], 
         ['high', 'medium', 'low']);
 
-    addItemForm.addButton('Add To-do Item');
+    addItemForm.addButton('Add to-do item');
 
     addItemForm.display();
 
@@ -91,6 +91,8 @@ class AddForm {
         input.id = id;
         if (type)
             input.type = type;
+        else
+            input.type = 'text';
 
         inputRow.appendChild(labelElement);
         inputRow.appendChild(input);
@@ -122,9 +124,6 @@ class AddForm {
             inputRow.appendChild(input);
             inputRow.appendChild(radioLabel);
         }
-
-        
-
         this.container.appendChild(inputRow);
     }
 
