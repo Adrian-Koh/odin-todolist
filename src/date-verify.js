@@ -1,13 +1,21 @@
-import {isFuture} from "date-fns";
+import {isFuture, format} from "date-fns";
 
-function verifyDate(date) {
-    const arr = date.split('-');
-    const year = parseInt(arr[0]);
-    const month = parseInt(arr[1]);
-    const day = parseInt(arr[2]);
-    console.log(Date.now());
-    
-    return isFuture(new Date(year, month-1, day));
+function verifyDate(dateString) {
+    const date = getDate(dateString);
+    return isFuture(date);
 }
 
-export {verifyDate};
+function formatDate(dateString) {
+    const date = getDate(dateString);
+    return format(date, "dd MMM yyyy");
+}
+
+function getDate(dateString) {
+    const arr = dateString.split('-');
+    const year = parseInt(arr[0]);
+    const month = parseInt(arr[1]) - 1;
+    const day = parseInt(arr[2]);
+    return new Date(year, month, day);
+}
+
+export {verifyDate, formatDate};

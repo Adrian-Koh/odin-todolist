@@ -1,4 +1,5 @@
 import { TodoProject } from "./todo-project";
+import { formatDate } from "./date-verify";
 
 function updateProjectsSection(storage) {
     const projectsListSection = document.querySelector('#projects-list');
@@ -50,7 +51,7 @@ function populateTodoItems(storage, project) {
         itemSection.appendChild(itemTitle);
 
         const itemDueDate = document.createElement('div');
-        itemDueDate.innerText = 'due by ' + item.dueDate;
+        itemDueDate.innerText = 'due by ' + formatDate(item.dueDate);
         itemDueDate.className = 'todo-item-duedate';
         itemSection.appendChild(itemDueDate);
 
